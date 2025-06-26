@@ -1,0 +1,6 @@
+streamlit
+ultralytics
+deep_sort_realtime
+opencv-python-headless
+Pillow
+torch
