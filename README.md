@@ -1,136 +1,154 @@
-🧍‍♂️Human Posture Tracking Web App
+# 🧍‍♂️ Human Posture Tracking Web App
 
+Aplikasi web interaktif berbasis **Streamlit** untuk mendeteksi dan melacak **postur duduk/berdiri manusia** dari video menggunakan **YOLOv8** dan **Deep SORT**. Aplikasi ini mampu menghitung durasi setiap postur per individu dan memungkinkan pengguna mengunduh hasilnya dalam bentuk video dan file CSV.
 
+---
 
+## 🌟 Fitur Utama
 
-Aplikasi web interaktif berbasis Streamlit untuk mendeteksi dan melacak postur duduk/berdiri manusia dari video menggunakan YOLOv8 dan Deep SORT. Aplikasi ini mampu menghitung durasi setiap postur per individu dan memungkinkan pengguna mengunduh hasilnya dalam bentuk video dan file CSV.
+* 🎯 **Deteksi & Pelacakan Cerdas**
+  Deteksi postur duduk/berdiri dengan YOLOv8 dan pelacakan ID unik menggunakan Deep SORT.
 
-🌟 Fitur Utama
-Deteksi & Tracking Cerdas: Deteksi duduk/berdiri menggunakan YOLOv8 dan pelacakan ID unik dengan Deep SORT
+* 🎥 **Visualisasi Real-Time**
+  Tampilkan kotak deteksi dan label durasi langsung di atas video.
 
-Visualisasi Real-Time: Tampilkan video dengan kotak deteksi dan label ID+durasi
+* ⏱️ **Timer Otomatis**
+  Hitung durasi duduk dan berdiri secara terpisah untuk tiap orang.
 
-Timer Otomatis: Hitung waktu duduk dan berdiri untuk tiap orang dalam video
+* 📁 **Ekspor CSV & Video**
+  Unduh hasil deteksi berupa video dan data waktu dalam format CSV.
 
-Ekspor CSV & Video: Unduh video hasil analisis dan rekapitulasi waktu dalam bentuk CSV
+* 🌐 **100% Berbasis Web**
+  Tidak perlu instalasi tambahan, dapat dijalankan langsung di Streamlit Cloud.
 
-100% Berbasis Web: Tidak perlu instalasi lokal, dapat dijalankan di Streamlit Cloud
+---
 
-📂 Format Input yang Didukung
-🎥 Format video: .mp4
+## 📂 Format Input yang Didukung
 
-📏 Resolusi: Fleksibel (otomatis disesuaikan)
+* 🎞️ Format video: `.mp4`
+* 📏 Resolusi: Bebas (otomatis disesuaikan)
+* 👥 Mendukung banyak orang (multi-ID) dalam satu video
 
-👥 Dukungan multi-orang dengan ID unik
+---
 
-🚀 Cara Cepat Menjalankan Aplikasi
-Prasyarat
-Python 3.10+
+## 🚀 Cara Cepat Menjalankan Aplikasi
 
-(Opsional) GPU dengan CUDA untuk inferensi lebih cepat
+### ⚖️ Prasyarat
 
-Langkah Instalasi
-Clone repository
+* Python **3.10+**
+* (Opsional) GPU dengan CUDA untuk mempercepat proses deteksi
 
-bash
-Copy code
-git clone https://github.com/username/posture-tracking-streamlit.git
-cd posture-tracking-streamlit
-Buat virtual environment
+### 🛠️ Instalasi
 
-bash
-Copy code
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-Instalasi dependensi
+1. **Clone repository**
 
-bash
-Copy code
-pip install -r requirements.txt
-Letakkan model YOLO
-Simpan file best.pt (hasil training model deteksi postur) di direktori proyek.
+   ```bash
+   git clone https://github.com/username/posture-tracking-streamlit.git
+   cd posture-tracking-streamlit
+   ```
 
-Jalankan aplikasi
+2. **Buat virtual environment**
 
-bash
-Copy code
-streamlit run app.py
-🧠 Cara Kerja Aplikasi
-Pengguna mengunggah video .mp4
+   ```bash
+   python -m venv venv
+   source venv/bin/activate     # Windows: venv\Scripts\activate
+   ```
 
-Setiap frame diproses dengan YOLOv8 untuk deteksi manusia dan klasifikasi postur
+3. **Instalasi dependensi**
 
-Deep SORT melacak posisi orang dari frame ke frame, memberi ID unik
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Sistem menghitung durasi waktu duduk dan berdiri untuk setiap ID
+4. **Letakkan model YOLOv8**
+   Simpan file `best.pt` (model deteksi postur) di direktori utama proyek.
 
-Hasil dapat diunduh sebagai:
+5. **Jalankan aplikasi**
 
-📥 Video hasil (output_posture.mp4)
+   ```bash
+   streamlit run app.py
+   ```
 
-📄 File CSV (output_posture.csv)
+---
 
-📊 Contoh Output CSV
-csv
-Copy code
+## 🧠 Cara Kerja Aplikasi
+
+1. Pengguna mengunggah video `.mp4` melalui web interface.
+2. Setiap frame dianalisis oleh **YOLOv8** untuk mendeteksi dan mengklasifikasi postur manusia (duduk atau berdiri).
+3. **Deep SORT** melacak objek yang terdeteksi dan memberi **ID unik** untuk tiap orang.
+4. Timer menghitung durasi **duduk** dan **berdiri** secara otomatis berdasarkan ID.
+5. Setelah video selesai diproses, pengguna dapat:
+
+   * 👅 Mengunduh **video hasil deteksi**
+   * 📄 Mengunduh **CSV ringkasan waktu postur**
+
+---
+
+## 📊 Contoh Output CSV
+
+```csv
 ID,Sit Duration (s),Stand Duration (s)
 1,75,32
 2,10,98
 3,0,140
-📁 Struktur Folder Proyek
-bash
-Copy code
+```
+
+---
+
+## 📁 Struktur Folder Proyek
+
+```bash
 .
-├── app.py                # Script utama Streamlit
-├── best.pt               # Model deteksi postur (YOLOv8)
-├── requirements.txt      # Daftar dependensi Python
-├── runtime.txt           # Versi Python untuk Streamlit Cloud
+├── app.py              # Script utama aplikasi Streamlit
+├── best.pt             # Model YOLOv8 untuk deteksi postur
+├── requirements.txt    # Daftar pustaka Python
+├── runtime.txt         # Versi Python untuk deployment Streamlit Cloud
 └── ...
-🔧 Daftar Dependensi
-txt
-Copy code
-streamlit                # Antarmuka web interaktif
-ultralytics              # Library YOLOv8 untuk deteksi objek
-deep_sort_realtime       # Pelacakan objek real-time
-opencv-python-headless   # Pemrosesan video (tanpa GUI)
+```
+
+---
+
+## 🔧 Daftar Dependensi (requirements.txt)
+
+```txt
+streamlit                # Framework UI berbasis web
+ultralytics              # YOLOv8 untuk deteksi postur
+deep_sort_realtime       # Pelacakan objek multi-ID
+opencv-python-headless   # Pengolahan video
 Pillow                   # Manipulasi gambar
-torch                    # Framework deep learning
-Semua dependensi terdaftar di file requirements.txt.
+torch                    # Framework machine learning (PyTorch)
+```
 
-☁️ Deployment di Streamlit Cloud
-Upload proyek ke GitHub
+---
 
-Pastikan app.py, requirements.txt, dan runtime.txt tersedia
+## ☁️ Deployment di Streamlit Cloud
 
-Kunjungi https://streamlit.io/cloud
+1. Upload proyek ke GitHub.
+2. Pastikan file `app.py`, `requirements.txt`, dan `runtime.txt` tersedia.
+3. Buka [https://streamlit.io/cloud](https://streamlit.io/cloud).
+4. Klik **"New App"** → Pilih repository → Klik **"Deploy"**.
+5. Pastikan file `best.pt` tersedia di root repository.
 
-Klik New App → Pilih repo GitHub → Klik Deploy
+> ⚠️ **Catatan:** Streamlit Cloud tidak mendukung GPU, jadi sebaiknya gunakan video berdurasi pendek agar proses berjalan optimal.
 
-Model best.pt dapat diunggah ke root repo atau ditautkan dari URL
+---
 
-⚠️ Catatan: Streamlit Cloud tidak mendukung GPU, jadi disarankan menggunakan video pendek untuk performa optimal.
+## 📈 Rencana Pengembangan
 
-📈 Rencana Pengembangan
-🔴 Dukungan real-time dari webcam
+* 🎥 Dukungan deteksi dari webcam secara real-time
+* 🢎 Tambahan postur lain seperti membungkuk, jongkok, tidur
+* ⏰ Fitur peringatan jika duduk terlalu lama
+* 📡 Integrasi API untuk pemantauan ruang publik / sekolah / kantor
 
-🧍 Deteksi lebih banyak postur (contoh: membungkuk, tidur)
+---
 
-⏰ Peringatan waktu duduk terlalu lama
+## 🤝 Kontribusi
 
-🌐 Integrasi API untuk pemantauan kantor/sekolah
+Kami menyambut kontribusi dari siapa pun!
 
-🤝 Kontribusi
-Kami terbuka untuk kontribusi komunitas! Kamu bisa:
+### Cara Berkontribusi:
 
-Melaporkan bug
-
-Menambahkan fitur baru
-
-Memperbaiki dokumentasi
-
-Langkah Kontribusi
-bash
-Copy code
+```bash
 # 1. Buat cabang baru
 git checkout -b fitur/postur-lain
 
@@ -139,21 +157,23 @@ git commit -m "feat: menambahkan deteksi jongkok"
 
 # 3. Push ke GitHub dan buat Pull Request
 git push origin fitur/postur-lain
-🙌 Ucapan Terima Kasih
-YOLOv8 dari Ultralytics
+```
 
-Deep SORT dari nwojke/deep_sort
+---
 
-Streamlit sebagai framework pembuatan UI Python
+## 🙌 Ucapan Terima Kasih
 
-⭐ Dukung Proyek Ini
-Jika aplikasi ini bermanfaat:
+* **Ultralytics YOLOv8**: [https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
+* **Deep SORT Tracking**: [https://github.com/nwojke/deep\_sort](https://github.com/nwojke/deep_sort)
+* **Streamlit**: Untuk framework web berbasis Python yang sangat mudah digunakan
 
-🌟 Beri bintang pada repo
+---
 
-🍴 Fork dan kembangkan lebih lanjut
+## ⭐ Dukung Proyek Ini
 
-🔗 Bagikan ke teman/kolega
+Jika aplikasi ini membantu Anda:
 
-💬 Beri masukan dan feedback
-
+* 🌟 Berikan bintang di GitHub
+* 🍟 Fork dan kembangkan sendiri
+* 🔗 Bagikan ke rekan/komunitas Anda
+* 💬 Beri masukan agar kami bisa terus meningkatkan aplikasi ini
