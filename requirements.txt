@@ -1,6 +1,17 @@
+# Streamlit digunakan untuk membangun antarmuka web interaktif
 streamlit
+
+# Ultralytics adalah library resmi untuk YOLOv8 (deteksi objek)
 ultralytics
+
+# Deep SORT digunakan untuk pelacakan objek secara real-time antar frame
 deep_sort_realtime
+
+# Versi OpenCV tanpa GUI (headless), cocok untuk server/Streamlit Cloud
 opencv-python-headless
+
+# Pillow digunakan untuk manipulasi dan konversi gambar (misalnya dari array ke image)
 Pillow
+
+# PyTorch adalah framework deep learning, digunakan oleh YOLOv8
 torch
