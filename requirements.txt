@@ -8,7 +8,7 @@ ultralytics
 deep_sort_realtime
 
 # Versi OpenCV tanpa GUI (headless), cocok untuk server/Streamlit Cloud
-opencv-python-headless==4.11.0.86
+opencv-python-headless
 
 # Pillow digunakan untuk manipulasi dan konversi gambar (misalnya dari array ke image)
 Pillow
